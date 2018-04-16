@@ -39,7 +39,6 @@
     },
     mounted () {
       let url = serverPath + '/websocket/getrooms';
-      //let url = 'http://localhost:8000' + '/websocket/getrooms';
       axios.get(url,{withCredentials:true}).then((res, req) => {
         console.log(res.data);
         res = res.data;

@@ -2,7 +2,7 @@ import Express from 'express'
 import create from './api/token'
 import connect from './api/websocket'
 import getRooms from './api/getrooms'
-import { setData,getData,checkData } from './api/subject'
+import { setData, getData, checkData } from './api/subject'
 
 let router = Express.Router();
 

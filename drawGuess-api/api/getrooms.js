@@ -2,7 +2,8 @@ import stdRes from '../stdRes.js'
 import globalData from '../overallData'
 //获取房间列表
 let getRooms = (req, res) => {
-	let result = {rooms:[]},roomId = 1;
+	let result = {rooms: []}, roomId = 1;
+	console.log(globalData.ROOMS);
 	for(let token in globalData.ROOMS){
         result.rooms.push({
         	id : roomId++,

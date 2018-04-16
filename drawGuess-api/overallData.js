@@ -1,6 +1,3 @@
-import cookieParser from 'cookie-parser'
-import cookie from 'cookie'
-
 let globalData = {
 	ROOM_ID: 1,//全局变量 房间序号
 	ROOMS: [],// 全局变量 房间信息
