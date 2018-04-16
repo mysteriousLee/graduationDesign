@@ -283,18 +283,29 @@
         });
       },
       checkAns () {
-        let url = serverPath + '/subject/check/' + this.answer +"/" + this.roomId;
-        axios.get(url,{withCredentials:true}).then((res, req) => {
-          if (res.data.errcode === 0) {
-            this.socket.emit('checkmsg',{'msg': 'success','token': document.cookie});
-            this.answer = '';
-            console.log("你答对了哦");          
-          } else {
-            this.socket.emit('checkmsg',{'msg': 'error','token': document.cookie});
-            console.log("你答错了哦");
-            this.answer = '';
-          }
-        });
+        if(this.answer === '') {
+          alert('答案不能为空');
+        } else{
+          let url = serverPath + '/subject/check/' + this.answer +"/" + this.roomId;
+          axios.get(url,{withCredentials:true}).then((res, req) => {
+            console.log(res.data);
+            if (res.data.errcode === 0) {
+              this.socket.emit('checkmsg',{'msg': 'success','token': document.cookie});
+              console.log("你答对了哦");
+              this.answer = '';
+              // setTimeout(() => {
+              //   alert("你答对了哦");
+              // }, 50);        
+            } else {
+              this.socket.emit('checkmsg',{'msg': 'error','token': document.cookie});
+              console.log("你答错了哦");
+              //setTimeout(() => {
+              //   alert("你答错了哦");
+              // }, 50);
+              this.answer = '';
+            }
+          });
+        }
       }
     },
     components:{
