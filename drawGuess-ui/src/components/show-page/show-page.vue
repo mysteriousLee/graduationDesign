@@ -9,6 +9,7 @@
           <span class="header__warp--living">房间正在游戏中</span>
         </div>
       </header>
+      <div class="owner-point" v-if="this.id==='owner'" ref="ownerPointJudge">有人答对了！</div>
       <footer class="guessBar">
         <div class="ownerSub" v-if="this.id==='owner'">
           <span v-text="ownerData"></span>
@@ -235,10 +236,11 @@
           this.setSubject();
           socket.on('checkmsg', (data) => {
             if (data === 'success') {
-              console.log('有人答对了！');
+             this.$refs['ownerPointJudge'].style.display = 'block';
+             setTimeout(() => {
+              this.$refs['ownerPointJudge'].style.display = 'none';
               this.setSubject();
-            } else{
-              console.log('有人答错了！');
+             },1000);
             }
           });
         } else if (this.id === 'host') {
@@ -291,17 +293,17 @@
             console.log(res.data);
             if (res.data.errcode === 0) {
               this.socket.emit('checkmsg',{'msg': 'success','token': document.cookie});
-              console.log("你答对了哦");
+              //console.log("你答对了哦");
               this.answer = '';
-              // setTimeout(() => {
-              //   alert("你答对了哦");
-              // }, 50);        
+              setTimeout(() => {
+                alert("你答对了哦");
+              }, 100);        
             } else {
               this.socket.emit('checkmsg',{'msg': 'error','token': document.cookie});
-              console.log("你答错了哦");
-              //setTimeout(() => {
-              //   alert("你答错了哦");
-              // }, 50);
+              //console.log("你答错了哦");
+              setTimeout(() => {
+                alert("你答错了哦");
+              }, 100);
               this.answer = '';
             }
           });
@@ -340,6 +342,21 @@
         overflow: hidden
         position: relative
         background: #fff
+        .owner-point
+          height: 30px
+          width: 120px
+          position: fixed
+          top: 50%
+          left: 50%
+          margin-top: -15px
+          margin-left: -60px
+          background-color: #d4af7a
+          color: #fff
+          text-align: center
+          line-height: 30px
+          font-size: 16px
+          border-radius: 10px
+          display: none
       .header
         width: 100vw
         background: #d4af7a
