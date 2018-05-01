@@ -26,4 +26,10 @@ let checkData = (req, res) => {
 		res.json(stdRes('error',-1,{}));
 	}
 };
-export { setData,getData,checkData };
+let getHelp = (req, res) => {
+	let id = req.params.id;
+	res.json(stdRes('success',0,{
+		answer: globalData.DATA[id].ans
+	}));
+};
+export { setData,getData,checkData,getHelp };

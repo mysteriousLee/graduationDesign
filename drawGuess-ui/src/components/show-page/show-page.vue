@@ -16,8 +16,11 @@
         </div>
         <div class="hostSub" v-else>
           <span v-text="hostData"></span>
-          <input type="text" placeholder="请输入答案" v-model="answer">
-          <input type="button" name="" value="发送" v-on:click="checkAns">
+          <div>
+            <input type="text" placeholder="请输入答案" v-model="answer">
+            <input type="button" name="" value="发送" v-on:click="checkAns">
+            <input type="button" name="" value="求助" v-on:click="findHelp">
+          </div>
         </div>
       </footer>
       <section class="paint" id="paint" ref="paint">
@@ -308,6 +311,13 @@
             }
           });
         }
+      },
+      findHelp () {
+        console.log('help');
+        let url = serverPath + '/subject/help/' + this.roomId;
+          axios.get(url,{withCredentials:true}).then((res, req) => {
+            alert("答案是：" + res.data.answer);
+          });
       }
     },
     components:{
@@ -654,9 +664,10 @@
     }
   }
   .guessBar{
-      height: 50px;
+      height: 60px;
       width: 100%;
       box-sizing: border-box;
+      position: relative;
       .ownerSub {
         width: 100%;
         position: relative;
@@ -673,30 +684,42 @@
         }
       }
        .hostSub{
+        width: 100%;
         height: 100%;
-        width: 500px;
-        margin: 0 auto;
+        position: absolute;
         span{
+          position: absolute;
+          top: 5px;
+          left: 50%;
+          margin-left: -150px;
+          width: 300px;
           font-size: 20px;
           color: #D4AF7A;
           font-weight: bold;
         }
-        input[type="button"]{
+        div{
+          position: absolute;
+          top: 30px;
+          left: 50%;
+          width: 350px;
+          margin-left: -175px;
+          input[type="button"]{
           color: #D4AF7A;
           border: 1px solid #D4AF7A;
           border-radius: 6px;
           width: 50px;
           height: 30px;
-        }
-        input[type="button"]:hover{
-          color: #fff;
-          background-color: #D4AF7A;
-        }
-        input[type="text"]{
-          color: #000;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          height: 30px;
+          }
+          input[type="button"]:hover{
+            color: #fff;
+            background-color: #D4AF7A;
+          }
+          input[type="text"]{
+            color: #000;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 30px;
+          }
         }
        }
     }

@@ -2,7 +2,7 @@ import Express from 'express'
 import create from './api/token'
 import connect from './api/websocket'
 import getRooms from './api/getrooms'
-import { setData, getData, checkData } from './api/subject'
+import { setData, getData, checkData, getHelp } from './api/subject'
 
 let router = Express.Router();
 
@@ -18,4 +18,6 @@ router.get('/subject/set/:id', setData);
 router.get('/subject/get/:id', getData);
 //检查答案
 router.get('/subject/check/:answer/:id', checkData);
+//求助
+router.get('/subject/help/:id', getHelp);
 export default router;
