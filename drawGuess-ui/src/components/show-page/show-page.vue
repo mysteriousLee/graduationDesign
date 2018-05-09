@@ -246,6 +246,13 @@
              },1000);
             }
           });
+          socket.on('findhelp', (data) => {
+            if(data === 'success') {
+              setTimeout(() => {
+                alert('有人求助啦！');
+              },2000);
+            }
+          });
         } else if (this.id === 'host') {
           this.getSubject();
           this.$refs['cursorEraser'].style.display = 'none';
@@ -262,7 +269,7 @@
                 this.getSubject();
               },200);
             }
-          })
+          });
         }
       },
       getSubject () {
@@ -318,6 +325,7 @@
           axios.get(url,{withCredentials:true}).then((res, req) => {
             alert("答案是：" + res.data.answer);
           });
+        this.socket.emit('findhelp',{'msg': 'success','token': document.cookie});
       }
     },
     components:{

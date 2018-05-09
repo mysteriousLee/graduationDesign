@@ -71,6 +71,12 @@ global.IO.on('connection', (socket) => {
                         link.emit('checkmsg',data.msg);
                 };
             });
+            socket.on('findhelp', (data) => {
+                let tokenData = data.token.split('=')[1];
+                console.log(data.token);
+                let connectHost = globalData.ROOMS[tokenData].connectPool[0];
+                connectHost.emit('findhelp',data.msg);
+            });
         }
      });
 
